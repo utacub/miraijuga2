@@ -1,0 +1,776 @@
+{
+ "bancal": {
+  "tris": 416,
+  "verts": 462,
+  "ossos": [],
+  "clips": {},
+  "meta": {
+   "radi": 0.75,
+   "alt": 0.62
+  },
+  "kb": 21.9
+ },
+ "forat": {
+  "tris": 282,
+  "verts": 330,
+  "ossos": [],
+  "clips": {},
+  "meta": {
+   "centre": [
+    0.0,
+    -0.301,
+    0.583
+   ],
+   "normal": [
+    0.0,
+    -0.274,
+    0.962
+   ]
+  },
+  "kb": 16.1
+ },
+ "vora": {
+  "tris": 592,
+  "verts": 666,
+  "ossos": [],
+  "clips": {},
+  "meta": {
+   "radi": 0.5,
+   "gruix": 0.12,
+   "z": 0.513
+  },
+  "kb": 31.0
+ },
+ "llavor": {
+  "tris": 80,
+  "verts": 110,
+  "ossos": [],
+  "clips": {},
+  "meta": {},
+  "kb": 6.2
+ },
+ "brot": {
+  "tris": 348,
+  "verts": 444,
+  "ossos": [
+   "arrel",
+   "fulla_0",
+   "fulla_1"
+  ],
+  "clips": {
+   "brotar": {
+    "frames": 24,
+    "dur": 1.0,
+    "loop": false
+   },
+   "vent": {
+    "frames": 48,
+    "dur": 2.0,
+    "loop": true
+   }
+  },
+  "meta": {
+   "alt": 0.5
+  },
+  "kb": 42.6
+ },
+ "planta_jove": {
+  "tris": 816,
+  "verts": 1026,
+  "ossos": [
+   "arrel",
+   "fulla_0",
+   "fulla_1",
+   "fulla_2",
+   "fulla_3",
+   "fulla_4"
+  ],
+  "clips": {
+   "brotar": {
+    "frames": 30,
+    "dur": 1.25,
+    "loop": false
+   },
+   "vent": {
+    "frames": 48,
+    "dur": 2.0,
+    "loop": true
+   }
+  },
+  "meta": {
+   "alt": 0.95
+  },
+  "kb": 91.2
+ },
+ "pastanaga": {
+  "tris": 2664,
+  "verts": 3216,
+  "ossos": [
+   "arrel",
+   "cos",
+   "fulla_0",
+   "fulla_1",
+   "fulla_2",
+   "brac_E",
+   "brac_D"
+  ],
+  "clips": {
+   "repos": {
+    "frames": 48,
+    "dur": 2.0,
+    "loop": true
+   },
+   "sortir": {
+    "frames": 30,
+    "dur": 1.25,
+    "loop": false
+   },
+   "saludar": {
+    "frames": 36,
+    "dur": 1.5,
+    "loop": false
+   },
+   "saltar": {
+    "frames": 30,
+    "dur": 1.25,
+    "loop": false
+   },
+   "ballar": {
+    "frames": 48,
+    "dur": 2.0,
+    "loop": true
+   },
+   "riure": {
+    "frames": 24,
+    "dur": 1.0,
+    "loop": false
+   },
+   "estirar": {
+    "frames": 24,
+    "dur": 1.0,
+    "loop": false
+   },
+   "caure": {
+    "frames": 24,
+    "dur": 1.0,
+    "loop": false
+   }
+  },
+  "meta": {
+   "alt": 1.36,
+   "radi": 0.495,
+   "enterrat": 0.62
+  },
+  "kb": 301.6
+ },
+ "rave": {
+  "tris": 2592,
+  "verts": 3160,
+  "ossos": [
+   "arrel",
+   "cos",
+   "fulla_0",
+   "fulla_1",
+   "fulla_2",
+   "cua",
+   "brac_E",
+   "brac_D"
+  ],
+  "clips": {
+   "repos": {
+    "frames": 48,
+    "dur": 2.0,
+    "loop": true
+   },
+   "sortir": {
+    "frames": 30,
+    "dur": 1.25,
+    "loop": false
+   },
+   "saludar": {
+    "frames": 36,
+    "dur": 1.5,
+    "loop": false
+   },
+   "saltar": {
+    "frames": 30,
+    "dur": 1.25,
+    "loop": false
+   },
+   "ballar": {
+    "frames": 48,
+    "dur": 2.0,
+    "loop": true
+   },
+   "riure": {
+    "frames": 24,
+    "dur": 1.0,
+    "loop": false
+   },
+   "estirar": {
+    "frames": 24,
+    "dur": 1.0,
+    "loop": false
+   },
+   "caure": {
+    "frames": 24,
+    "dur": 1.0,
+    "loop": false
+   }
+  },
+  "meta": {
+   "alt": 1.06,
+   "radi": 0.54,
+   "enterrat": 0.34,
+   "cua": 0.44
+  },
+  "kb": 313.9
+ },
+ "tomaquet": {
+  "tris": 1784,
+  "verts": 2176,
+  "ossos": [
+   "arrel",
+   "cos",
+   "tija",
+   "brac_E",
+   "brac_D"
+  ],
+  "clips": {
+   "repos": {
+    "frames": 48,
+    "dur": 2.0,
+    "loop": true
+   },
+   "sortir": {
+    "frames": 30,
+    "dur": 1.25,
+    "loop": false
+   },
+   "saludar": {
+    "frames": 36,
+    "dur": 1.5,
+    "loop": false
+   },
+   "saltar": {
+    "frames": 30,
+    "dur": 1.25,
+    "loop": false
+   },
+   "ballar": {
+    "frames": 48,
+    "dur": 2.0,
+    "loop": true
+   },
+   "riure": {
+    "frames": 24,
+    "dur": 1.0,
+    "loop": false
+   },
+   "estirar": {
+    "frames": 24,
+    "dur": 1.0,
+    "loop": false
+   },
+   "caure": {
+    "frames": 24,
+    "dur": 1.0,
+    "loop": false
+   }
+  },
+  "meta": {
+   "alt": 1.0,
+   "radi": 0.56,
+   "penja": [
+    0.02,
+    0,
+    1.17
+   ]
+  },
+  "kb": 212.0
+ },
+ "carbassa": {
+  "tris": 1804,
+  "verts": 2176,
+  "ossos": [
+   "arrel",
+   "cos",
+   "fulla_0",
+   "tija",
+   "brac_E",
+   "brac_D"
+  ],
+  "clips": {
+   "repos": {
+    "frames": 48,
+    "dur": 2.0,
+    "loop": true
+   },
+   "sortir": {
+    "frames": 30,
+    "dur": 1.25,
+    "loop": false
+   },
+   "saludar": {
+    "frames": 36,
+    "dur": 1.5,
+    "loop": false
+   },
+   "saltar": {
+    "frames": 30,
+    "dur": 1.25,
+    "loop": false
+   },
+   "ballar": {
+    "frames": 48,
+    "dur": 2.0,
+    "loop": true
+   },
+   "riure": {
+    "frames": 24,
+    "dur": 1.0,
+    "loop": false
+   },
+   "estirar": {
+    "frames": 24,
+    "dur": 1.0,
+    "loop": false
+   },
+   "caure": {
+    "frames": 24,
+    "dur": 1.0,
+    "loop": false
+   }
+  },
+  "meta": {
+   "alt": 0.94,
+   "radi": 0.67
+  },
+  "kb": 218.8
+ },
+ "pesol": {
+  "tris": 2850,
+  "verts": 3520,
+  "ossos": [
+   "arrel",
+   "cos",
+   "tija",
+   "pesol_0",
+   "pesol_1",
+   "pesol_2",
+   "brac_E",
+   "brac_D"
+  ],
+  "clips": {
+   "repos": {
+    "frames": 48,
+    "dur": 2.0,
+    "loop": true
+   },
+   "sortir": {
+    "frames": 30,
+    "dur": 1.25,
+    "loop": false
+   },
+   "saludar": {
+    "frames": 36,
+    "dur": 1.5,
+    "loop": false
+   },
+   "saltar": {
+    "frames": 30,
+    "dur": 1.25,
+    "loop": false
+   },
+   "ballar": {
+    "frames": 48,
+    "dur": 2.0,
+    "loop": true
+   },
+   "riure": {
+    "frames": 24,
+    "dur": 1.0,
+    "loop": false
+   },
+   "estirar": {
+    "frames": 24,
+    "dur": 1.0,
+    "loop": false
+   },
+   "caure": {
+    "frames": 24,
+    "dur": 1.0,
+    "loop": false
+   }
+  },
+  "meta": {
+   "alt": 1.5,
+   "radi": 0.41,
+   "penja": [
+    -0.035,
+    0,
+    1.58
+   ]
+  },
+  "kb": 327.0
+ },
+ "maduixa": {
+  "tris": 2011,
+  "verts": 2730,
+  "ossos": [
+   "arrel",
+   "cos",
+   "tija",
+   "brac_E",
+   "brac_D"
+  ],
+  "clips": {
+   "repos": {
+    "frames": 48,
+    "dur": 2.0,
+    "loop": true
+   },
+   "sortir": {
+    "frames": 30,
+    "dur": 1.25,
+    "loop": false
+   },
+   "saludar": {
+    "frames": 36,
+    "dur": 1.5,
+    "loop": false
+   },
+   "saltar": {
+    "frames": 30,
+    "dur": 1.25,
+    "loop": false
+   },
+   "ballar": {
+    "frames": 48,
+    "dur": 2.0,
+    "loop": true
+   },
+   "riure": {
+    "frames": 24,
+    "dur": 1.0,
+    "loop": false
+   },
+   "estirar": {
+    "frames": 24,
+    "dur": 1.0,
+    "loop": false
+   },
+   "caure": {
+    "frames": 24,
+    "dur": 1.0,
+    "loop": false
+   }
+  },
+  "meta": {
+   "alt": 1.13,
+   "radi": 0.505,
+   "penja": [
+    0.015,
+    0,
+    1.31
+   ],
+   "llavors": 47
+  },
+  "kb": 250.1
+ },
+ "planta_tomaquet": {
+  "tris": 1322,
+  "verts": 1692,
+  "ossos": [
+   "arrel"
+  ],
+  "clips": {},
+  "meta": {
+   "penja": [
+    -0.4,
+    -0.28,
+    1.38
+   ],
+   "escala": 0.7,
+   "alt": 2.13
+  },
+  "kb": 110.6
+ },
+ "planta_maduixa": {
+  "tris": 2428,
+  "verts": 3124,
+  "ossos": [
+   "arrel"
+  ],
+  "clips": {},
+  "meta": {
+   "penja": [
+    0.6,
+    -0.26,
+    1.24
+   ],
+   "escala": 0.62,
+   "alt": 1.98
+  },
+  "kb": 193.1
+ },
+ "planta_pesol": {
+  "tris": 1136,
+  "verts": 1466,
+  "ossos": [
+   "arrel"
+  ],
+  "clips": {},
+  "meta": {
+   "penja": [
+    0.52,
+    -0.26,
+    1.8
+   ],
+   "escala": 0.62,
+   "alt": 2.38
+  },
+  "kb": 95.7
+ },
+ "planta_carbassa": {
+  "tris": 626,
+  "verts": 810,
+  "ossos": [
+   "arrel"
+  ],
+  "clips": {},
+  "meta": {
+   "seu": [
+    0,
+    0,
+    0.52
+   ],
+   "escala": 0.8
+  },
+  "kb": 52.0
+ },
+ "nap": {
+  "tris": 4730,
+  "verts": 5632,
+  "ossos": [
+   "arrel",
+   "cos",
+   "fulla_0",
+   "fulla_1",
+   "fulla_2",
+   "fulla_3",
+   "fulla_4",
+   "cua",
+   "brac_E",
+   "brac_D"
+  ],
+  "clips": {
+   "repos": {
+    "frames": 48,
+    "dur": 2.0,
+    "loop": true
+   },
+   "sortir": {
+    "frames": 30,
+    "dur": 1.25,
+    "loop": false
+   },
+   "ballar": {
+    "frames": 48,
+    "dur": 2.0,
+    "loop": true
+   },
+   "riure": {
+    "frames": 24,
+    "dur": 1.0,
+    "loop": false
+   },
+   "saltar": {
+    "frames": 30,
+    "dur": 1.25,
+    "loop": false
+   },
+   "tremolar": {
+    "frames": 24,
+    "dur": 1.0,
+    "loop": false
+   }
+  },
+  "meta": {
+   "alt": 2.48,
+   "radi": 1.29,
+   "enterrat": 1.8,
+   "cua": 0.74
+  },
+  "kb": 459.0
+ },
+ "talpa": {
+  "tris": 5462,
+  "verts": 6892,
+  "ossos": [
+   "arrel",
+   "cos",
+   "cap",
+   "brac_E",
+   "ma_E",
+   "cama_E",
+   "brac_D",
+   "ma_D",
+   "cama_D",
+   "cua",
+   "barret"
+  ],
+  "clips": {
+   "repos": {
+    "frames": 48,
+    "dur": 2.0,
+    "loop": true
+   },
+   "guaitar": {
+    "frames": 48,
+    "dur": 2.0,
+    "loop": true
+   },
+   "sortir": {
+    "frames": 24,
+    "dur": 1.0,
+    "loop": false
+   },
+   "assenyalar_D": {
+    "frames": 36,
+    "dur": 1.5,
+    "loop": false
+   },
+   "assenyalar_E": {
+    "frames": 36,
+    "dur": 1.5,
+    "loop": false
+   },
+   "aplaudir": {
+    "frames": 32,
+    "dur": 1.3333,
+    "loop": false
+   },
+   "estirar": {
+    "frames": 24,
+    "dur": 1.0,
+    "loop": false
+   },
+   "ballar": {
+    "frames": 48,
+    "dur": 2.0,
+    "loop": true
+   },
+   "saludar": {
+    "frames": 36,
+    "dur": 1.5,
+    "loop": false
+   },
+   "saltar": {
+    "frames": 30,
+    "dur": 1.25,
+    "loop": false
+   },
+   "caure": {
+    "frames": 24,
+    "dur": 1.0,
+    "loop": false
+   }
+  },
+  "meta": {
+   "alt": 2.0,
+   "radi": 0.545,
+   "cap": 1.42
+  },
+  "kb": 646.7
+ },
+ "sac": {
+  "tris": 1632,
+  "verts": 1982,
+  "ossos": [
+   "arrel"
+  ],
+  "clips": {
+   "abocar": {
+    "frames": 36,
+    "dur": 1.5,
+    "loop": false
+   }
+  },
+  "meta": {
+   "alt": 1.1,
+   "radi": 0.55,
+   "boca": [
+    0,
+    0,
+    1.08
+   ]
+  },
+  "kb": 132.4
+ },
+ "regadora": {
+  "tris": 1686,
+  "verts": 2040,
+  "ossos": [
+   "arrel"
+  ],
+  "clips": {
+   "regar": {
+    "frames": 48,
+    "dur": 2.0,
+    "loop": false
+   }
+  },
+  "meta": {
+   "alt": 1.47,
+   "radi": 0.6,
+   "broc": [
+    1.121,
+    0.0,
+    0.983
+   ],
+   "broc_dir": [
+    0.695,
+    0.0,
+    0.719
+   ]
+  },
+  "kb": 138.4
+ },
+ "sol": {
+  "tris": 1408,
+  "verts": 1852,
+  "ossos": [
+   "arrel",
+   "cos",
+   "raigs"
+  ],
+  "clips": {
+   "brillar": {
+    "frames": 48,
+    "dur": 2.0,
+    "loop": true
+   }
+  },
+  "meta": {
+   "radi": 0.5,
+   "radi_raigs": 0.78
+  },
+  "kb": 125.9
+ },
+ "cistella": {
+  "tris": 1568,
+  "verts": 1842,
+  "ossos": [
+   "arrel"
+  ],
+  "clips": {},
+  "meta": {
+   "alt": 1.5,
+   "radi": 0.66,
+   "vora": 0.62,
+   "fons": 0.2
+  },
+  "kb": 119.4
+ }
+}
