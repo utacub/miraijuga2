@@ -30,7 +30,8 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 #parade .pc.w{height:9vmin}#parade .pc.t{height:13.5vmin}
 #parade .pc img,#parade .pc video{height:100%;width:auto;display:block}
 #parade .pc video{position:absolute;bottom:0;left:50%;transform:translateX(-50%);visibility:hidden}
-#parade .pc video.on{visibility:visible}#parade .pc.vid img{visibility:hidden}
+#parade .pc video.on{visibility:visible}
+#parade .pc canvas.sac{position:absolute;bottom:0;left:50%;transform:translateX(-50%);height:100%;width:auto;display:block;visibility:hidden}#parade .pc.vid img{visibility:hidden}
 #parade .pc.hop{animation:hola 1.8s ease-in-out}#parade .pc.flap img{animation:flap .45s ease-in-out 4}
 @keyframes flap{50%{transform:scaleX(.55)}}
 @keyframes hola{0%,100%{transform:none}25%{transform:translateY(-18%) rotate(-6deg)}55%{transform:translateY(-4%) rotate(5deg)}75%{transform:translateY(-9%)}}
@@ -747,11 +748,13 @@ function goMenu(){if(TRB)return;if(view!=='scene'){goMenu0();return}clearDw();co
   m.classList.add('hold');m.style.webkitMaskImage=m.style.maskImage='radial-gradient(circle at 50% 50%,transparent 400vmax,#000 400vmax)';
   menuIris(-1,x,y,800,()=>goMenu0())}
 /* portada: filera de personatges (vídeos prerenderitzats dels models; repòs en bucle i salutació d'un en un) */
-(()=>{const P=[...document.querySelectorAll('#parade .pc')],V2D={ous:'hop',tren:'hop',jardi:'flap'};let k=0,tm=0;
-  for(const p of P){const n=p.dataset.k;if(V2D[n]||SAV)continue;const mk=(r,loop)=>{const v=document.createElement('video');v.muted=true;v.playsInline=true;v.loop=loop;v.preload='auto';v.setAttribute('muted','');v.src=U('portada/v_'+n+'_'+r+'.webm');p.appendChild(v);return v};
+(()=>{const P=[...document.querySelectorAll('#parade .pc')],V2D={jardi:'flap'};let k=0,tm=0;
+  for(const p of P){const n=p.dataset.k;if(V2D[n])continue;const mk=(r,loop)=>{const v=document.createElement('video');v.muted=true;v.playsInline=true;v.loop=loop;v.preload='auto';v.setAttribute('muted','');v.src=VSRC('portada/v_'+n+'_'+r+'.webm');if(SAV){const c=AF(v);c.className='sac';p.appendChild(c)}else p.appendChild(v);return v};
     p.r=mk('r',true);p.s=mk('s',false);p.r.addEventListener('playing',()=>{p.r.classList.add('on');p.classList.add('vid')},{once:true});
     p.s.addEventListener('ended',()=>{if(n==='estany'&&!p.s.rep){p.s.rep=1;p.s.currentTime=0;p.s.play();return}p.r.classList.add('on');p.s.classList.remove('on');p.r.play().catch(()=>{});tm=setTimeout(next,700)})}
   const vis=()=>$('#start').classList.contains('on')&&!document.hidden;
+  /* Safari: els vídeos no són a la pàgina; es pinta el fotograma recompost (AF) del que està actiu */
+  if(SAV){const PV=P.filter(p=>p.r);(function f(){if(vis())for(const p of PV)for(const v of [p.r,p.s]){const on=v.classList.contains('on');v._ac.style.visibility=on?'visible':'hidden';if(on)AF(v)}requestAnimationFrame(f)})()}
   function next(){clearTimeout(tm);if(!vis()){tm=setTimeout(next,1000);return}const p=P[k];k=(k+1)%P.length;const n=p.dataset.k;
     if(V2D[n]||!p.classList.contains('vid')){const c=V2D[n]||'hop';p.classList.remove(c);void p.offsetWidth;p.classList.add(c);tm=setTimeout(next,2400);return}
     p.s.rep=0;p.s.currentTime=0;p.s.play().then(()=>{p.s.classList.add('on');p.r.classList.remove('on');p.r.pause()}).catch(()=>{tm=setTimeout(next,1500)})}

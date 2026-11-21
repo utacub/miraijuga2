@@ -30,7 +30,8 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 #parade .pc.w{height:9vmin}#parade .pc.t{height:13.5vmin}
 #parade .pc img,#parade .pc video{height:100%;width:auto;display:block}
 #parade .pc video{position:absolute;bottom:0;left:50%;transform:translateX(-50%);visibility:hidden}
-#parade .pc video.on{visibility:visible}#parade .pc.vid img{visibility:hidden}
+#parade .pc video.on{visibility:visible}
+#parade .pc canvas.sac{position:absolute;bottom:0;left:50%;transform:translateX(-50%);height:100%;width:auto;display:block;visibility:hidden}#parade .pc.vid img{visibility:hidden}
 #parade .pc.hop{animation:hola 1.8s ease-in-out}#parade .pc.flap img{animation:flap .45s ease-in-out 4}
 @keyframes flap{50%{transform:scaleX(.55)}}
 @keyframes hola{0%,100%{transform:none}25%{transform:translateY(-18%) rotate(-6deg)}55%{transform:translateY(-4%) rotate(5deg)}75%{transform:translateY(-9%)}}
@@ -175,7 +176,7 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
     <button class="chip card-glass" id="instBtn"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 19.5h14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="install"></span></button></div>
   </div>
   <button id="credBtn" class="card-glass" data-i18n="credBtn"></button>
-  <span id="ver">v1.0</span>
+  <span id="ver">v1.1</span>
   <a id="utac" href="https://www.utac.cat" target="_blank" rel="noopener"><img src="utac.png" alt="UTAC"><span>www.utac.cat</span></a>
   <div id="load"><i></i></div>
 </div>
@@ -348,7 +349,7 @@ const LANGN={ca:'Català',es:'Castellano',eu:'Euskara',gl:'Galego',en:'English',
   </div>
   <h3 data-i18n="tools.h"></h3>
   <div data-i18n-html="cred.body"></div>
-  <p class="verc">Mira i Juga 2 · <span data-i18n="version"></span> 1.0</p>
+  <p class="verc">Mira i Juga 2 · <span data-i18n="version"></span> 1.1</p>
   <button id="credClose" class="btnP" data-i18n="close"></button>
 </div></div>
 <div id="instM" class="modal" role="dialog" aria-labelledby="instH"><div class="panel"><h2 id="instH"></h2><div class="ibody"></div></div></div>
@@ -10138,11 +10139,13 @@ function goMenu(){if(TRB)return;if(view!=='scene'){goMenu0();return}clearDw();co
   m.classList.add('hold');m.style.webkitMaskImage=m.style.maskImage='radial-gradient(circle at 50% 50%,transparent 400vmax,#000 400vmax)';
   menuIris(-1,x,y,800,()=>goMenu0())}
 /* portada: filera de personatges (vídeos prerenderitzats dels models; repòs en bucle i salutació d'un en un) */
-(()=>{const P=[...document.querySelectorAll('#parade .pc')],V2D={ous:'hop',tren:'hop',jardi:'flap'};let k=0,tm=0;
-  for(const p of P){const n=p.dataset.k;if(V2D[n]||SAV)continue;const mk=(r,loop)=>{const v=document.createElement('video');v.muted=true;v.playsInline=true;v.loop=loop;v.preload='auto';v.setAttribute('muted','');v.src=U('portada/v_'+n+'_'+r+'.webm');p.appendChild(v);return v};
+(()=>{const P=[...document.querySelectorAll('#parade .pc')],V2D={jardi:'flap'};let k=0,tm=0;
+  for(const p of P){const n=p.dataset.k;if(V2D[n])continue;const mk=(r,loop)=>{const v=document.createElement('video');v.muted=true;v.playsInline=true;v.loop=loop;v.preload='auto';v.setAttribute('muted','');v.src=VSRC('portada/v_'+n+'_'+r+'.webm');if(SAV){const c=AF(v);c.className='sac';p.appendChild(c)}else p.appendChild(v);return v};
     p.r=mk('r',true);p.s=mk('s',false);p.r.addEventListener('playing',()=>{p.r.classList.add('on');p.classList.add('vid')},{once:true});
     p.s.addEventListener('ended',()=>{if(n==='estany'&&!p.s.rep){p.s.rep=1;p.s.currentTime=0;p.s.play();return}p.r.classList.add('on');p.s.classList.remove('on');p.r.play().catch(()=>{});tm=setTimeout(next,700)})}
   const vis=()=>$('#start').classList.contains('on')&&!document.hidden;
+  /* Safari: els vídeos no són a la pàgina; es pinta el fotograma recompost (AF) del que està actiu */
+  if(SAV){const PV=P.filter(p=>p.r);(function f(){if(vis())for(const p of PV)for(const v of [p.r,p.s]){const on=v.classList.contains('on');v._ac.style.visibility=on?'visible':'hidden';if(on)AF(v)}requestAnimationFrame(f)})()}
   function next(){clearTimeout(tm);if(!vis()){tm=setTimeout(next,1000);return}const p=P[k];k=(k+1)%P.length;const n=p.dataset.k;
     if(V2D[n]||!p.classList.contains('vid')){const c=V2D[n]||'hop';p.classList.remove(c);void p.offsetWidth;p.classList.add(c);tm=setTimeout(next,2400);return}
     p.s.rep=0;p.s.currentTime=0;p.s.play().then(()=>{p.s.classList.add('on');p.r.classList.remove('on');p.r.pause()}).catch(()=>{tm=setTimeout(next,1500)})}
@@ -10223,7 +10226,7 @@ $('#iLang').onchange=e=>setLang(e.target.value);
    canviat. Visitar la web sense instal·lar no descarrega res de més. A file:// (HTML únic) tot queda apagat.
    Mateix funcionament i textos que la finestra d'instal·lació de Pim Pam.
    ========================================================= */
-const APP_VERSION='1.0';
+const APP_VERSION='1.1';
 const PWA_TX={
 ca:{'pwa.ios':'A l’iPad i l’iPhone, primer cal afegir {N} a la pantalla d’inici: toqueu Comparteix (el quadre amb la fletxa) › Afegeix a la pantalla d’inici. Després obriu-lo des de la icona nova i toqueu «Instal·lar» per descarregar-ho tot perquè funcioni sense connexió.','pwa.h':'Instal·la {N}','pwa.intro':'{N} s’instal·larà en aquest dispositiu com una aplicació, i s’hi descarregaran totes les activitats, els sons i els vídeos perquè funcioni sense connexió.','pwa.total':'Espai total que ocuparà instal·lat','pwa.video':'Vídeos','pwa.so':'Sons, veus i música','pwa.img':'Imatges','pwa.m3d':'Models 3D','pwa.codi':'Programa i textos','pwa.free':'Espai que aquest navegador pot fer servir en aquest dispositiu: {M}.','pwa.nospace':'No hi ha prou espai lliure per instal·lar {N} en aquest dispositiu.','pwa.slow':'La descàrrega pot trigar uns quants minuts. Les versions noves s’actualitzaran soles i només baixaran el que hagi canviat.','pwa.partial':'Una part ja és descarregada i no es tornarà a baixar.','pwa.cancel':'Cancel·la','pwa.go':'Instal·la ({M})','pwa.calc':'Calculant l’espai que ocupa…','pwa.dl':'S’estan descarregant les activitats, els sons i els vídeos. Deixeu aquesta finestra oberta fins que acabi.','pwa.of':'{A} de {B}','pwa.resume':'Si s’atura, la propera vegada continuarà on s’ha quedat.','pwa.stop':'Atura','pwa.ok1':'{N} està instal·lat en aquest dispositiu i funciona sense connexió.','pwa.ok2':'Totes les activitats ja són en aquest dispositiu i funcionen sense connexió.','pwa.hintApp':'Si el navegador no ha mostrat cap avís d’instal·lació: a Chrome i Edge, feu servir la icona d’instal·lar de la barra d’adreces; a l’iPad i l’iPhone, Safari › Comparteix › Afegeix a la pantalla d’inici.','pwa.used':'Espai que ocupa','pwa.del':'Esborra les activitats d’aquest dispositiu','pwa.app':'Instal·la l’aplicació','pwa.ok':'D’acord','pwa.close':'Tanca','pwa.retry':'Torna-ho a provar','pwa.eList':'No s’ha pogut saber què cal descarregar. Torneu-ho a provar d’aquí a una estona.','pwa.eOff':'Cal connexió a internet per instal·lar {N}.','pwa.eVer':'Mentre es descarregava s’ha publicat una versió nova de {N}. Torneu-ho a provar: continuarà on s’havia quedat.','pwa.eQuota':'No hi ha prou espai lliure en aquest dispositiu per acabar la instal·lació.','pwa.eNet':'No s’ha pogut descarregar tot. Torneu-ho a provar: continuarà on s’havia quedat.','pwa.eLost':'S’ha perdut la connexió. Torneu-ho a provar quan torni a haver-n’hi: continuarà on s’havia quedat.','pwa.installed':'Instal·lada','pwa.downloading':'Descarregant…','version':'Versió','pwa.upd':'S’ha descarregat la versió {V}: es veurà la propera vegada que obriu l’aplicació.'},
 es:{'pwa.ios':'En el iPad y el iPhone, primero hay que añadir {N} a la pantalla de inicio: tocad Compartir (el cuadro con la flecha) › Añadir a pantalla de inicio. Después abridla desde el icono nuevo y tocad «Instalar» para descargarlo todo y que funcione sin conexión.','pwa.h':'Instala {N}','pwa.intro':'{N} se instalará en este dispositivo como una aplicación, y se descargarán todas las actividades, los sonidos y los vídeos para que funcione sin conexión.','pwa.total':'Espacio total que ocupará instalada','pwa.video':'Vídeos','pwa.so':'Sonidos, voces y música','pwa.img':'Imágenes','pwa.m3d':'Modelos 3D','pwa.codi':'Programa y textos','pwa.free':'Espacio que este navegador puede usar en este dispositivo: {M}.','pwa.nospace':'No hay suficiente espacio libre para instalar {N} en este dispositivo.','pwa.slow':'La descarga puede tardar unos minutos. Las versiones nuevas se actualizarán solas y solo bajarán lo que haya cambiado.','pwa.partial':'Una parte ya está descargada y no se volverá a bajar.','pwa.cancel':'Cancelar','pwa.go':'Instalar ({M})','pwa.calc':'Calculando el espacio que ocupa…','pwa.dl':'Se están descargando las actividades, los sonidos y los vídeos. Dejad esta ventana abierta hasta que termine.','pwa.of':'{A} de {B}','pwa.resume':'Si se detiene, la próxima vez continuará donde se quedó.','pwa.stop':'Detener','pwa.ok1':'{N} está instalada en este dispositivo y funciona sin conexión.','pwa.ok2':'Todas las actividades ya están en este dispositivo y funcionan sin conexión.','pwa.hintApp':'Si el navegador no ha mostrado ningún aviso de instalación: en Chrome y Edge, usad el icono de instalar de la barra de direcciones; en el iPad y el iPhone, Safari › Compartir › Añadir a pantalla de inicio.','pwa.used':'Espacio que ocupa','pwa.del':'Borrar las actividades de este dispositivo','pwa.app':'Instalar la aplicación','pwa.ok':'De acuerdo','pwa.close':'Cerrar','pwa.retry':'Volver a intentarlo','pwa.eList':'No se ha podido saber qué hay que descargar. Volved a intentarlo dentro de un rato.','pwa.eOff':'Hace falta conexión a internet para instalar {N}.','pwa.eVer':'Mientras se descargaba se ha publicado una versión nueva de {N}. Volved a intentarlo: continuará donde se quedó.','pwa.eQuota':'No hay suficiente espacio libre en este dispositivo para terminar la instalación.','pwa.eNet':'No se ha podido descargar todo. Volved a intentarlo: continuará donde se quedó.','pwa.eLost':'Se ha perdido la conexión. Volved a intentarlo cuando vuelva a haberla: continuará donde se quedó.','pwa.installed':'Instalada','pwa.downloading':'Descargando…','version':'Versión','pwa.upd':'Se ha descargado la versión {V}: se verá la próxima vez que abráis la aplicación.'},
