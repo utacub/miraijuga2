@@ -106,6 +106,21 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 #nav:not(.multi) #nEye,#nav.hideui #nEye{right:2vmin}
 #nav.hideui .nb:not(#nEye),#nav.hideui #stitle,#nav.hideui #tray{display:none!important}
 #nav.hideui #nEye{opacity:.55}#nav.hideui #nEye:hover{opacity:1}
+/* informació (ⓘ) de l'activitat, com a Pim Pam: al costat de l'ull; només clic (sense .dwell); l'ull l'amaga com la navegació (regla .nb:not(#nEye)) */
+#nInfo{right:28vmin;cursor:pointer}#nav:not(.multi) #nInfo{right:15vmin}#nav.mini #nInfo{right:16vmin}#nav.mini:not(.multi) #nInfo{right:9vmin}#nInfo[hidden]{display:none}
+#infoM .ipanel{width:min(1180px,96vw);max-height:94vh;padding:22px 26px 20px;display:flex;flex-direction:column;background:#fffaf2}
+#infoM .ihead{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;padding-bottom:12px;border-bottom:1px solid #eadfcd;margin-bottom:16px}
+#infoM .ihead h2{font-size:26px;margin:0 0 4px}#infoM .ihead p{font-size:14px;line-height:1.5;color:#5b5446;margin:0}
+#infoM .ix{position:relative;flex:none;width:64px;height:64px;border-radius:50%;background:#f1e8d8;display:flex;align-items:center;justify-content:center;cursor:pointer}#infoM .ix svg{width:46%;height:46%}#infoM .ix.dwell::after{border-radius:50%}
+#infoM .igrid{overflow:auto;display:grid;grid-auto-rows:max-content;align-content:start;min-height:0;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px;padding:2px 4px 4px}
+#infoM .icard{background:#fff;border:1px solid #eadfcd;border-radius:16px;overflow:hidden;box-shadow:0 2px 8px rgba(80,50,20,.08)}
+#infoM .icard img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover}
+#infoM .icard h3{font-size:18px;font-weight:900;margin:12px 14px 0;display:flex;gap:8px;align-items:baseline;color:#1a2433}#infoM .icard h3 span{color:#a0896a;font-size:13px;font-weight:800}
+#infoM .isci{display:block;margin:2px 14px 6px;font-size:13px;color:#7a6f5d}
+#infoM .icard p{font-size:14.5px;line-height:1.5;margin:0 14px 7px;color:#2b3442}#infoM .icard p:last-child{margin-bottom:14px}
+#infoM .btnP{align-self:center;min-width:180px;min-height:56px;font-size:18px;position:relative}
+@media (max-width:600px){#infoM .ipanel{padding:16px 14px}#infoM .ihead h2{font-size:21px}}
+@media (max-height:540px){#infoM .ipanel{display:block;overflow:auto;padding:12px 16px}#infoM .igrid{overflow:visible}#infoM .ihead{margin-bottom:10px;padding-bottom:8px}#infoM .ihead h2{font-size:19px}#infoM .ihead p{font-size:12px}#infoM .ix{width:52px;height:52px}#infoM .btnP{display:block;margin:14px auto 4px}}
 #tray{position:absolute;top:8.6vmin;left:50%;transform:translateX(-50%);display:flex;gap:.8vmin;padding:.7vmin 1.2vmin;border-radius:3vmin;align-items:center}
 #tray img{height:5.4vmin;width:auto;filter:grayscale(1) brightness(1.15) opacity(.45);transition:filter .4s,transform .4s}
 #tray img.on{filter:none;transform:scale(1.12)}
@@ -199,6 +214,7 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
   <div id="tray" class="card-glass"></div>
   <button class="nb dwell" id="nNext" data-i18n-aria="next"><svg viewBox="0 0 24 24"><path d="M8.5 4.5 16 12l-7.5 7.5" fill="none" stroke="#1d2a3a" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
   <button class="nb" id="nEye" type="button"></button>
+  <button class="nb" id="nInfo" type="button" hidden><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="#1d2a3a" stroke-width="2.4"/><path d="M12 11v6" fill="none" stroke="#1d2a3a" stroke-width="2.8" stroke-linecap="round"/><circle cx="12" cy="7.4" r="1.6" fill="#1d2a3a"/></svg></button>
 </div>
 
 <div id="opts" class="modal" role="dialog"><div class="panel">
@@ -705,7 +721,7 @@ const SCENES=[{id:'bosc',img:'menu/bosc.webp'},{id:'ous',img:'menu/ous.webp',c:'
   {id:'ones',img:'menu/ones.webp',c:'#ffe0c4'},{id:'robots',img:'menu/robots.webp',c:'#f7d9b4'},{id:'ombra',img:'menu/ombra.webp',c:'#f3d7c4'},{id:'parelles',img:'menu/parelles.webp',c:'#d2f0c8'},{id:'conte',img:'menu/conte.webp',c:'#f3dcc0'}];
 const AV=SCENES.map((s,i)=>s.ico?-1:i).filter(i=>i>=0);
 function show(id){$('#start').classList.toggle('on',id==='start');$('#menu').classList.toggle('on',id==='menu');$('#nav').classList.toggle('on',id==='scene')}
-function updCursor(){document.body.classList.toggle('nocur',!optsOpen&&!$('#cred').classList.contains('on')&&view!=='start'&&CFG.cursor!==1)}
+function updCursor(){document.body.classList.toggle('nocur',!optsOpen&&!$('#cred').classList.contains('on')&&!document.querySelector('#infoM.on')&&view!=='start'&&CFG.cursor!==1)}
 function stopVideos(){for(const k in A)for(const c of KINDS)A[k].V[c].pause()}
 function goMenu0(){view='menu';stopVideos();ONES.stop();OUS.stop();TREN.stop();JARDI.stop();ESTANY.stop();HORT.stop();TEMPS.stop();BONANIT.stop();RENTA.stop();CARGOLS.stop();ROBOTS.stop();OMBRA.stop();PARELLES.stop();CONTE.stop();$('#tray').innerHTML='';S=null;clearDw();show('menu');ctx.setTransform(1,0,0,1,0,0);ctx.clearRect(0,0,cv.width,cv.height);updCursor();updLoops()}
 let SID='bosc',CURI=0;
@@ -779,7 +795,7 @@ $('#nEye').addEventListener('click',e=>{e.stopPropagation();e.preventDefault();i
 updEye();
 $('#nPrev').onclick=()=>stepScn(-1);$('#nNext').onclick=()=>stepScn(1);$('#nHome').onclick=goMenu;
 function toggleOpts(v){optsOpen=v===undefined?!optsOpen:v;$('#opts').classList.toggle('on',optsOpen);syncOpts();updCursor()}
-function setNav(){const n=$('#nav');n.classList.toggle('mini',!CFG.navGaze);n.querySelectorAll('.nb:not(#nEye)').forEach(b=>b.classList.toggle('dwell',CFG.navGaze))}
+function setNav(){const n=$('#nav');n.classList.toggle('mini',!CFG.navGaze);n.querySelectorAll('.nb:not(#nEye):not(#nInfo)').forEach(b=>b.classList.toggle('dwell',CFG.navGaze))}
 function syncOpts(){document.querySelectorAll('.seg').forEach(s=>s.querySelectorAll('button').forEach(b=>b.classList.toggle('sel',+b.dataset.v===CFG[s.dataset.k])));
   $('#iDw').value=CFG.dwell;$('#oDw').textContent=(+CFG.dwell).toFixed(1);$('#iSp').value=CFG.speed;$('#oSp').textContent=CFG.speed==0?T('stopped'):(+CFG.speed).toFixed(1)+'×';
   $('#iSnd').checked=CFG.sound;$('#iMus').checked=CFG.music;$('#iMVol').value=CFG.mvol;$('#iVol').value=CFG.vol;$('#iTr').checked=CFG.trail;$('#iSim').checked=CFG.simple;$('#iNav').checked=CFG.navGaze;$('#iLow').checked=LOWQ;$('#oN').textContent=STATS.n}

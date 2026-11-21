@@ -14,6 +14,8 @@ const PARELLES=(()=>{
   const TX=__PATX__;
   for(const l in TX)if(I18N[l])for(const k in TX[l])I18N[l][k==='sc'?'sc.parelles':'par.'+k]=TX[l][k];
   const IX=__PAIX__;
+  /* fitxes d'informació (botó ⓘ, com a Pim Pam): parelles/info.json → __PAINF__ (font: miraijuga2/parelles/info/fitxes.json) */
+  const INF=__PAINF__;
   const AN=['isard','trencalos','almesquera','salamandra','geneta','ermini','abellerol','puput'];
   /* alçada a l'era relativa (com al prototip validat) */
   const FH={isard:1.25,trencalos:1.1,almesquera:.9,salamandra:.62,geneta:1.3,ermini:1,abellerol:1,puput:.95};
@@ -293,7 +295,7 @@ const PARELLES=(()=>{
     if(!st.hw||st.hw.state!=='closed')st.hw=closed[Math.floor(Math.random()*closed.length)];return pack(st.hw)}
 
   /* ───── pas de temps ───── */
-  function step(dt){if(!R||!ready||!st)return;if(lq!==LOWQ)quality();
+  function step(dt){if(!R||!ready||!st||infoOn)return;if(lq!==LOWQ)quality();
     const sp=CFG.speed,kk=sp>0?Math.max(.4,sp):1,dA=dt*kk,free_=!optsOpen&&view==='scene';now+=dA;st.t+=dA;
     const [wx,wy]=toWorld(cmx,cmy),has=free_&&cmx>-999;ringP=0;
     for(let i=wait.length-1;i>=0;i--)if(now>=wait[i].t){const w=wait.splice(i,1)[0];w.f()}
@@ -367,13 +369,36 @@ const PARELLES=(()=>{
   function clearAll(){for(const x of INST)if(x!==MI)give(x);if(MI){MI.mx.stopAllAction();MI.cur=null;MI.cn=''}}
   function layout(){if(!ready)return;clearAll();newGame()}
   function setMode(m){MODE=m;document.querySelectorAll('#tray .mb').forEach(b=>b.classList.toggle('sel',+b.dataset.m===m));if(on&&ready){clearAll();newGame()}}
-  function tray(){const t=$('#tray');t.innerHTML='';['par.m1','par.m2'].forEach((k,m)=>{const b=document.createElement('button');b.className='mb dwell';b.dataset.m=m;b.textContent=T(k);
+  function tray(){if(on)infoBtn(true);const t=$('#tray');t.innerHTML='';['par.m1','par.m2'].forEach((k,m)=>{const b=document.createElement('button');b.className='mb dwell';b.dataset.m=m;b.textContent=T(k);
       b.onclick=e=>{e.stopPropagation();setMode(m)};t.appendChild(b)});
     document.querySelectorAll('#tray .mb').forEach(b=>b.classList.toggle('sel',+b.dataset.m===MODE))}
-  function start(){init();on=true;first=true;cvs.style.display='block';fgc.style.display='block';tray();if(ready)layout()}
-  function stop(){on=false;vStop();if(cvs){cvs.style.display='none';fgc.style.display='none'}if(R&&ready)clearAll();st=null}
+  /* ───── informació dels animals (botó ⓘ de #nav, només clic real: s'amaga amb l'ull com la navegació) ───── */
+  let infoOn=false,infoM=null;
+  function infoBuild(){const L=INF[LANG]||INF.ca,m=infoM;m.innerHTML='';m.setAttribute('aria-label',L.h);
+    const pn=document.createElement('div');pn.className='panel ipanel';m.appendChild(pn);
+    const hd=document.createElement('div');hd.className='ihead';pn.appendChild(hd);
+    const tx=document.createElement('div');hd.appendChild(tx);const h=document.createElement('h2');h.id='infoH';h.textContent=L.h;const p=document.createElement('p');p.textContent=L.p;tx.append(h,p);
+    const x=document.createElement('button');x.className='ix dwell';x.type='button';x.setAttribute('aria-label',L.close);x.title=L.close;
+    x.innerHTML='<svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="#1d2a3a" stroke-width="3" stroke-linecap="round"/></svg>';x.onclick=e=>{e.stopPropagation();infoClose()};hd.appendChild(x);
+    const g=document.createElement('div');g.className='igrid';pn.appendChild(g);
+    INF.order.forEach((k,i)=>{const [t,ls]=L[k],a=document.createElement('article');a.className='icard';
+      const im=document.createElement('img');im.alt='';im.src=U('parelles/t/info_'+k+'.webp');
+      const h3=document.createElement('h3'),n=document.createElement('span');n.textContent=i+1;h3.append(n,document.createTextNode(t));
+      const sc=document.createElement('i');sc.className='isci';sc.textContent=INF.sci[k];a.append(im,h3,sc);
+      for(const l of ls){const q=document.createElement('p');q.textContent=l;a.appendChild(q)}g.appendChild(a)});
+    const c=document.createElement('button');c.className='btnP dwell';c.type='button';c.textContent=L.close;c.onclick=e=>{e.stopPropagation();infoClose()};pn.appendChild(c)}
+  function infoOpen(){if(infoOn||!on)return;if(!infoM){infoM=document.createElement('div');infoM.id='infoM';infoM.className='modal';infoM.setAttribute('role','dialog');infoM.setAttribute('aria-modal','true');
+      infoM.addEventListener('click',e=>{if(e.target===infoM)infoClose()});document.body.appendChild(infoM)}
+    infoBuild();infoOn=true;infoM.classList.add('on');infoM.querySelector('.igrid').scrollTop=0;updCursor()}
+  function infoClose(){if(!infoOn)return;infoOn=false;if(infoM)infoM.classList.remove('on');updCursor()}
+  addEventListener('keydown',e=>{if(!infoOn)return;e.stopImmediatePropagation();if(e.key==='Escape'||e.key==='Enter'||e.key===' '){e.preventDefault();infoClose()}},true);
+  {const b=document.getElementById('nInfo');if(b){['pointerdown','mousedown','pointerup','mouseup','touchstart'].forEach(ev=>b.addEventListener(ev,e=>e.stopPropagation()));
+    b.addEventListener('click',e=>{e.stopPropagation();e.preventDefault();if(e.isTrusted)infoOpen()})}}
+  function infoBtn(v){const b=document.getElementById('nInfo');if(!b)return;b.hidden=!v;if(v){const t=(INF[LANG]||INF.ca).btn;b.setAttribute('aria-label',t);b.title=t}}
+  function start(){init();on=true;first=true;cvs.style.display='block';fgc.style.display='block';tray();infoBtn(true);if(ready)layout()}
+  function stop(){on=false;infoClose();infoBtn(false);vStop();if(cvs){cvs.style.display='none';fgc.style.display='none'}if(R&&ready)clearAll();st=null}
   function mus(){return st&&(st.ph==='sardana'||st.ph==='back')?st.sk||'m_par_sardana':'m_parelles'}
   const scr=(x,y)=>[OX+x*SC,OY+y*SC];
-  return {start,stop,step,render,layout,click,tray,toggle(){setMode(1-MODE)},setMode,mus,amb:()=>null,hit,hint,activate,actionable,scr,
+  return {start,stop,step,render,layout,click,tray,infoOpen,infoClose,info:()=>infoOn,toggle(){setMode(1-MODE)},setMode,mus,amb:()=>null,hit,hint,activate,actionable,scr,
     get st(){return st},get ready(){return ready},get mode(){return MODE},get idle(){return idle},get loading(){return loading},get R(){return R},get MI(){return MI},INST,IX,proj}
 })();
